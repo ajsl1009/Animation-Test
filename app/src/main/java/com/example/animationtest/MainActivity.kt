@@ -24,26 +24,26 @@ class MainActivity : AppCompatActivity() {
         setListener()
     }
 
-    private fun setListener(){
+    private fun setListener() {
         subBinding.tvUnfoldLayout.setOnClickListener {
-            setGuidePercent(0.8f, 0.2f)
-            with(centerBinding){
+            setGuidePercent(GUIDELINE_MAX, GUIDELINE_MIN)
+            with(centerBinding) {
                 fadeOut(clWrapper)
                 fadeIn(clTop)
             }
-            with(subBinding){
+            with(subBinding) {
                 fadeIn(clSubWrapper)
                 fadeOut(clSubTop)
             }
         }
 
         centerBinding.tvUnfoldLayoutMain.setOnClickListener {
-            setGuidePercent(0.2f, 0.8f)
-            with(centerBinding){
+            setGuidePercent(GUIDELINE_MIN, GUIDELINE_MAX)
+            with(centerBinding) {
                 fadeIn(clWrapper)
                 fadeOut(clTop)
             }
-            with(subBinding){
+            with(subBinding) {
                 fadeOut(clSubWrapper)
                 fadeIn(clSubTop)
             }
@@ -60,22 +60,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fadeOut(view: View) {
-        val animation = AlphaAnimation(ALPHAONE, ALPHAZERO)
+        val animation = AlphaAnimation(ALPHA_ONE, ALPHA_ZERO)
         animation.duration = DURATION
         view.visibility = View.GONE
         view.animation = animation
     }
 
     private fun fadeIn(view: View) {
-        val animation = AlphaAnimation(ALPHAZERO, ALPHAONE)
+        val animation = AlphaAnimation(ALPHA_ZERO, ALPHA_ONE)
         animation.duration = DURATION
         view.visibility = View.VISIBLE
         view.animation = animation
     }
 
-    companion object{
-        private const val ALPHAZERO = 0F
-        private const val ALPHAONE = 1F
+    companion object {
+        private const val ALPHA_ZERO = 0F
+        private const val ALPHA_ONE = 1F
+        private const val GUIDELINE_MAX = 0.8F
+        private const val GUIDELINE_MIN = 0.2F
         private const val DURATION = 500L
     }
 }
